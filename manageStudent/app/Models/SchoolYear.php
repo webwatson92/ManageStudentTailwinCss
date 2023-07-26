@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SchoolYears extends Model
+class SchoolYear extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'school_years',
-        'current_years',
+        'school_year',
+        'current_year',
         'active',
     ];
 }

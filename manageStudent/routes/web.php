@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NiveauController;
-use App\Http\Controllers\SettingController;
+use App\Http\Controllers\SchoolController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +32,16 @@ Route::middleware([
         Route::get('/', [NiveauController::class, 'index'])->name('niveaux.index');
     });
     Route::prefix('settings')->group(function(){
-        Route::get('/', [SettingController::class, 'index'])->name('school_years');
+        Route::get('/', [SchoolController::class, 'index'])->name('school_years');
+        Route::get('/creation-d-annee-scollaire', [SchoolController::class, 'create'])->name('create.anneescolaire');
     });
 });
+
+/* 
+* Bout de code permettant d'ajouter de nouvelles routes dans le repertoire web pour les intégrer à ce fichier web.php
+* Elle permet permet d'avoir plusieurs fichiers de routes 
+*/
+
+foreach(File::allFiles(__DIR__.'/web') as $route_file){
+    require $route_file->getPathname();
+}

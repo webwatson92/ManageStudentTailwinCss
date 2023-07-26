@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('school_years', function (Blueprint $table) {
             $table->id();
-            $table->string('school_years');
-            $table->string('current_years');
+            $table->string('school_year');
+            $table->string('current_year');
             $table->enum('active', [0, 1])->default(0);
             $table->timestamps();
         });

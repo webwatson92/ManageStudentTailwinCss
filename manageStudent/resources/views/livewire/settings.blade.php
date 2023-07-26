@@ -3,7 +3,7 @@
         {{-- Titre et bouton crée--}}
         <div class="flex justify-between items-center">
             <h4>Liste des Années scolaire</h4>
-            <a href="#" class="bg-blue-500 rounded-md p-2 text-white">
+            <a href="{{ route('create.anneescolaire') }}" class="bg-blue-500 rounded-md p-2 text-white">
                 Nouvelle année scoalaire
             </a>
         </div>
