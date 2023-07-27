@@ -10,7 +10,7 @@
         <div class="p-5">
             <label for="">{{ __('Libelle de l\'année scolaire') }}</label>
             <input wire:model="libelle" type="text" class="block mt-1 
-                             @error('libelle') border-red-500 bg-red-100 animate-bounce @enderror 
+                             @error('libelle') border-red-600 bg-red-100 animate-bounce @enderror 
                              rounded-md w-full border-gray-300">
             @error('libelle')
                 <div class="">* Le champ libelle est requis </div>
