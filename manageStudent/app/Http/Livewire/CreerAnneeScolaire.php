@@ -27,6 +27,7 @@ class CreerAnneeScolaire extends Component
                 $schoolYear->current_year = $anneeCourante;
                 $schoolYear->save();
                 if($schoolYear){ $this->libelle=""; }
+                Alert::toast('Année scolaire ajoutée avec succès.', 'success');
                 return redirect()->back()->with('success', "Année scolaire ajoutée.");
             }
 

@@ -3,7 +3,7 @@
         {{-- Titre et bouton crée--}}
         <div class="flex justify-between items-center">
             
-            <input wire:model="libelle" type="text" class="block mt-1 border-gray-300 rounded-md w-full">
+            <input wire:model="search" type="text" class="block mt-1 border-gray-300 rounded-md">
 
             <a href="{{ route('create.anneescolaire') }}" class="bg-blue-500 rounded-md p-2 text-white">
                 Nouvelle année scoalaire
@@ -31,7 +31,7 @@
                         </thead>
                         <tbody>
                             @php $id=1 @endphp
-                            @forelse($anneeScollaire as $item)
+                            @forelse($anneeScolaire as $item)
                                 <tr class="border-b-2 border-gray-100">
                                     <th class="text-sm font-medium text-gray-900 px-6 py-6">{{ $id++ }}</th>
                                     <th class="text-sm font-medium text-gray-900 px-6 py-6">{{ $item->school_year }}</th>
@@ -43,20 +43,31 @@
                                         @endif
                                     </th>
                                     <th class="text-sm font-medium text-gray-900 px-6 py-6">
-                                        @if($item->active >= 1)
-                                            <button class="text-sm bg-red-400 p-2 text-white rounded-sm">Désactiver</button>
-                                        @else
-                                            <button class="text-sm bg-green-400 p-2 text-white rounded-sm">Activer</button>
-                                        @endif
+                                            <button class="text-sm p-2 
+                                                {{ $item->active == 1 ? 'bg-red-400' : 'bg-green-400' }} 
+                                                    text-white rounded-sm" wire:click="activerOuDesactiver({{ $item->id }})">
+                                                {{ $item->active == 1 ? "Désactiver" : "Activer" }}
+                                            </button>
                                     </th>
                                 </tr>
                             @empty
+                                <tr class="w-full">
+                                    <td  class="flex-1 items-center justify-center"  colspan='4'>
+                                        <div>
+                                            <p class="flex justify-center content-center p-4">
+                                                <img src="{{ asset('img/empty.svg') }}" alt="aucun élément trouvé en base de donnée."
+                                                class="w-20 h-20">
+                                                <div>Aucun élément trouvé !</div>
+                                            </p>
+                                        </div>
+                                    </td>
+                                </tr>
                             @endforelse
                         </tbody>
                     </table>
 
                    <div class="mt-3">
-                        {{ $anneeScollaire->links() }}
+                        {{ $anneeScolaire->links() }}
                    </div>
                </div>
             </div>

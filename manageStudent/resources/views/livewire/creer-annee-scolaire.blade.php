@@ -21,6 +21,5 @@
             <button class="bg-red-600 px-3 py-3 rounded-sm text-white">Annuler</button>
             <button type="submit" class="bg-blue-400 p-3 rounded-sm text-white">Ajouter</button>
         </div>
-
      </form>
 </div>

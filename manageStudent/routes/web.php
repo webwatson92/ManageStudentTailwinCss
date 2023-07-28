@@ -34,6 +34,8 @@ Route::middleware([
     Route::prefix('settings')->group(function(){
         Route::get('/', [SchoolController::class, 'index'])->name('school_years');
         Route::get('/creation-d-annee-scollaire', [SchoolController::class, 'create'])->name('create.anneescolaire');
+        Route::get('/creation-niveau-de-classe', [NiveauController::class, 'create'])->name('create.niveaux');
+        Route::get('/edition-niveau/{niveau}', [NiveauController::class, 'edit'])->name('edition.niveaux');
     });
 });
 
