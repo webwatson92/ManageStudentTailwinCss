@@ -2,11 +2,19 @@
     <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-4">
         {{-- Titre et bouton crée--}}
         <div class="flex justify-between items-center">
-            
-            <input wire:model="search" placeholder="Rechercher..."  type="text" class="block mt-1 border-gray-300 rounded-md">
-
-            <a href="{{ route('creation.niveaux') }}" class="bg-blue-500 rounded-md p-2 text-white">
-                {{ __("Ajouter un niveau scolaire") }}
+            <div class="w-1/3">
+                <input wire:model="search" placeholder="Rechercher..."  type="text" class="block mt-1 border-gray-300 rounded-md">
+            </div>
+            <div class="w-1/3">
+                <select wire:model="selection_classe_id" class="block mt-1 w-full rounded-md border-gray-300">
+                    <option></option>
+                    @foreach($listeDesClasse as $item)
+                        <option value="{{ $item->id }}">{{ $item->libelle }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <a href="{{ route('creation.attribution') }}" class="bg-blue-500 rounded-md p-2 text-white">
+                    {{ __("Inscription dans une classe") }}
             </a>
         </div>
         {{-- section message flash avec sweetAlert --}}
@@ -16,7 +24,6 @@
                 <div class="block p-2 bg-green-500 text-white rounded-sm shadow-sm mt-2"> {{ Session::get('success') }}</div>
             </div>
         @endif
-
        {{-- Stylisation du tableau --}}
        <div class="overflow-x-auto">
             <div class="py-4 inline-block min-w-full">
@@ -25,23 +32,27 @@
                         <thead class="border-b bg-gray-50">
                             <tr>
                                 <th class="text-sm font-medium text-gray-900 px-6 py-6 text-black">Id</th>
-                                <th class="text-sm font-medium text-gray-900 px-6 py-6 text-black">Code</th>
-                                <th class="text-sm font-medium text-gray-900 px-6 py-6 text-black">Libellé</th>
-                                <th class="text-sm font-medium text-gray-900 px-6 py-6 text-black">Montant Scolarité</th>
+                                <th class="text-sm font-medium text-gray-900 px-6 py-6 text-black">Matricule</th>
+                                <th class="text-sm font-medium text-gray-900 px-6 py-6 text-black">Nom</th>
+                                <th class="text-sm font-medium text-gray-900 px-6 py-6 text-black">Prénom</th>
+                                <th class="text-sm font-medium text-gray-900 px-6 py-6 text-black">Classe</th>
+                                {{-- <th class="text-sm font-medium text-gray-900 px-6 py-6 text-black">Année scolaire</th> --}}
                                 <th class="text-sm font-medium text-gray-900 px-6 py-6 text-black">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             @php $id=1 @endphp
-                            @forelse($niveaux as $item)
+                            @forelse($eleveEnClasse as $item)
                                 <tr class="border-b-2 border-gray-100">
                                     <th class="text-sm font-medium text-gray-900 px-6 py-6">{{ $id++ }}</th>
-                                    <th class="text-sm font-medium text-gray-900 px-6 py-6">{{ $item->code }}</th>
-                                    <th class="text-sm font-medium text-gray-900 px-6 py-6">{{ $item->libelle }}</th>
-                                    <th class="text-sm font-medium text-gray-900 px-6 py-6">{{ number_format ($item->scolarite) }} FCFA</th>
+                                    <th class="text-sm font-medium text-gray-900 px-6 py-6">{{ $item->eleve->matricule  }}</th>
+                                    <th class="text-sm font-medium text-gray-900 px-6 py-6">{{ $item->eleve->nom  }}</th>
+                                    <th class="text-sm font-medium text-gray-900 px-6 py-6">{{ $item->eleve->prenom  }}</th>
+                                    <th class="text-sm font-medium text-gray-900 px-6 py-6">{{ $item->classe->libelle }}</th>
+                                    {{-- <th class="text-sm font-medium text-gray-900 px-6 py-6">{{ $item->school_year->school_year }} </th> --}}
                                     <th class="text-sm font-medium text-gray-900 px-6 py-6">
-                                            <a href="{{ route('edition.niveaux', $item->id) }}" class="p-1 rounded-sm bg-blue-400"><i class="fa-solid fa-pencil"></i></a>
-                                            <button data-confirm-delete="true" wire:click='supprimerNiveau({{ $item->id }})' class="p-1 rounded-sm bg-red-400"><i class="fa-solid fa-trash-can"></i></button>
+                                            <a href="{{ route('edition.attribution', $item->id) }}" class="p-1 rounded-sm bg-blue-400"><i class="fa-solid fa-pencil"></i></a>
+                                            <button data-confirm-delete="true" wire:click='supprimerRentrerClasse({{ $item->id }})' class="p-1 rounded-sm bg-red-400"><i class="fa-solid fa-trash-can"></i></button>
                                     </th>
                                 </tr>
                             @empty
@@ -61,7 +72,7 @@
                     </table>
 
                    <div class="mt-3">
-                        {{ $niveaux->links() }}
+                        {{ $eleveEnClasse->links() }}
                    </div>
                </div>
             </div>

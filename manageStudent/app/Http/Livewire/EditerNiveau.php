@@ -32,7 +32,7 @@ class EditerNiveau extends Component
                 if($niveau){ $this->libelle=""; $this->code=""; $this->scolarite="";}
                 Alert::toast('Modification du niveau scolaire effectué avec succès.', 'success');
                 //Alert::success('Félicitation !', 'Niveau scolaire ajoutée avec succès.');
-                return redirect()->route('niveaux.index');
+                return redirect()->route('niveaux');
             
         }catch(Exeception $e){
             //traitement de l'exeception

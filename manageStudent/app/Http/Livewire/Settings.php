@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\SchoolYear;
 use Livewire\WithPagination;
+use Alert;
 
 class Settings extends Component
 {
@@ -18,7 +19,8 @@ class Settings extends Component
         //Modification du champs actif à un état différent
         $schoolYear->active = '1';
         $schoolYear->save();
-        $this->render();//on appel la methode render pour recharger la page
+        //Alert::toast('Année scolaire activée !', 'success');
+        return redirect()->back();
 
     }
 

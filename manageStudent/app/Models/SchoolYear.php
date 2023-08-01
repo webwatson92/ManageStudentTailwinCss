@@ -13,4 +13,10 @@ class SchoolYear extends Model
         'current_year',
         'active',
     ];
+
+  /*   protected $table ="school_years"; */
+
+    public function niveau(){
+        return $this->hasMany(Niveau::class);
+    } 
 }

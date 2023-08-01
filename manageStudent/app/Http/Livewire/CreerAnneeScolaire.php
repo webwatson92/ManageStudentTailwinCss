@@ -5,7 +5,7 @@ namespace App\Http\Livewire;
 use Carbon\Carbon;
 use Livewire\Component;
 use App\Models\SchoolYear;
-use RealRashid\SweetAlert\Facades\Alert;
+use Alert;
 
 class CreerAnneeScolaire extends Component
 {
@@ -28,7 +28,7 @@ class CreerAnneeScolaire extends Component
                 $schoolYear->save();
                 if($schoolYear){ $this->libelle=""; }
                 Alert::toast('Année scolaire ajoutée avec succès.', 'success');
-                return redirect()->back()->with('success', "Année scolaire ajoutée.");
+                return redirect()->route('school_years')->with('success', "Année scolaire ajoutée.");
             }
 
         }catch(Exeception $e){

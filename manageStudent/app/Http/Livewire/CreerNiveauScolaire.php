@@ -32,7 +32,7 @@ class CreerNiveauScolaire extends Component
                 if($niveau){ $this->libelle=""; $this->code=""; $this->scolarite="";}
                 Alert::toast('Niveau scolaire ajoutée avec succès.', 'success');
                 //Alert::success('Félicitation !', 'Niveau scolaire ajoutée avec succès.');
-                return redirect()->route('niveaux.index');
+                return redirect()->route('niveaux');
             
         }catch(Exeception $e){
             //traitement de l'exeception

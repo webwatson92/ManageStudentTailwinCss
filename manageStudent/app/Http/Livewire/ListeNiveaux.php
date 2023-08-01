@@ -21,7 +21,7 @@ class ListeNiveaux extends Component
         confirmDelete($titreMessage, $message); */
         $niveau->delete();
         Alert::toast('Suppression du niveau scolaire effectué avec succès.', 'success');
-        return redirect()->route('niveaux.index');
+        return redirect()->route('niveaux');
     }
     
     public function render()
@@ -33,8 +33,8 @@ class ListeNiveaux extends Component
             return view('livewire.liste-niveaux', compact('niveaux'));
         }else{
             $anneeActive = SchoolYear::where('active', '1')->first();
-            $niveaux =  Niveau::orderBy('created_at', 'desc')
-                        ->where('school_year_id', $anneeActive->id)
+            $niveaux =  Niveau::with('school_year')->where('niveaux.school_year_id', $anneeActive->id)
+                        ->latest()
                         ->paginate(10);
             return view('livewire.liste-niveaux', compact('niveaux'));
         }

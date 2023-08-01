@@ -3,13 +3,14 @@
         {{-- Titre et bouton crée--}}
         <div class="flex justify-between items-center">
             
-            <input wire:model="search" type="text" class="block mt-1 border-gray-300 rounded-md">
+            <input wire:model="search" placeholder="Rechercher..."  type="text" class="block mt-1 border-gray-300 rounded-md">
 
-            <a href="{{ route('create.anneescolaire') }}" class="bg-blue-500 rounded-md p-2 text-white">
+            <a href="{{ route('creation.anneescolaire') }}" class="bg-blue-500 rounded-md p-2 text-white">
                 Nouvelle année scoalaire
             </a>
         </div>
         {{-- section message flash avec sweetAlert --}}
+        @include('sweetalert::alert')
         @if(Session::get('success'))
             <div class="p-5">
                 <div class="block p-2 bg-green-500 text-white rounded-sm shadow-sm mt-2"> {{ Session::get('success') }}</div>
