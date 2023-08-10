@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Paiements;
 use App\Models\Payment;
 use Livewire\Component;
 use Livewire\WithPagination;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ListePaiment extends Component
 {
@@ -12,6 +13,11 @@ class ListePaiment extends Component
 
     public $search= "";
     
+    public function supprimerPaiement(Payment $paiement){
+        $paiement->delete();
+        Alert::toast('Paiement supprimé !', 'success');
+        return redirect()->route('paiement');
+    }
 
     public function render()
     {

@@ -28,15 +28,6 @@
             @enderror
         </div>
 
-        <div class="p-5">
-            <label for="">{{ __('Montant de la scolarité') }}</label>
-            <input wire:model="scolarite" type="text" class="block mt-1 
-                            @error('scolarite') border-red-600 bg-red-100 animate-bounce @enderror 
-                            rounded-md w-full border-gray-300">
-            @error('scolarite')
-                <div class="">* Le champ montant de la scolarité est requis </div>
-            @enderror
-        </div>
        
        <div class="p-5 flex justify-between items-center">
            <button class="bg-red-600 px-3 py-3 rounded-sm text-white">Annuler</button>

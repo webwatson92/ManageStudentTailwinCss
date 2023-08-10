@@ -16,7 +16,6 @@ class CreerNiveauScolaire extends Component
         $this->validate([
             'code' =>"string|required|unique:niveaux",
             'libelle' =>"string|required|unique:niveaux",
-            'scolarite' =>"integer|required",
         ]);
 
         try{
@@ -25,11 +24,9 @@ class CreerNiveauScolaire extends Component
                 
                 $niveau->code = $this->code;
                 $niveau->libelle = $this->libelle;
-                $niveau->scolarite = $this->scolarite;
                 $niveau->school_year_id = $anneeActive->id;
 
                 $niveau->save();
-                if($niveau){ $this->libelle=""; $this->code=""; $this->scolarite="";}
                 Alert::toast('Niveau scolaire ajoutée avec succès.', 'success');
                 //Alert::success('Félicitation !', 'Niveau scolaire ajoutée avec succès.');
                 return redirect()->route('niveaux');

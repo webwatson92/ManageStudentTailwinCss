@@ -45,6 +45,16 @@
                         {{ __('Paiements') }}
                     </x-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link href="{{ route('parentEleve') }}" :active="request()->routeIs('parentEleve')">
+                        {{ __("Parents") }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link href="{{ route('frais') }}" :active="request()->routeIs('frais')">
+                        {{ __("Frais") }}
+                    </x-nav-link>
+                </div>
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">

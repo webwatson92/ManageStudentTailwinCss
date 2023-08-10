@@ -5,8 +5,8 @@
             
             <input wire:model="search" placeholder="Rechercher..."  type="text" class="block mt-1 border-gray-300 rounded-md">
 
-            <a href="{{ route('creation.niveaux') }}" class="bg-blue-500 rounded-md p-2 text-white">
-                {{ __("Ajouter un niveau scolaire") }}
+            <a href="{{ route('creation.frais') }}" class="bg-blue-500 rounded-md p-2 text-white">
+                {{ __("Ajouter le frais de scolaire pour un niveau") }}
             </a>
         </div>
         {{-- section message flash avec sweetAlert --}}
@@ -25,23 +25,23 @@
                         <thead class="border-b bg-gray-50">
                             <tr>
                                 <th class="text-sm font-medium text-gray-900 px-6 py-6 text-black">Id</th>
-                                <th class="text-sm font-medium text-gray-900 px-6 py-6 text-black">Code</th>
-                                <th class="text-sm font-medium text-gray-900 px-6 py-6 text-black">Libellé</th>
+                                <th class="text-sm font-medium text-gray-900 px-6 py-6 text-black">Année acadamique</th>
+                                <th class="text-sm font-medium text-gray-900 px-6 py-6 text-black">Niveau</th>
                                 <th class="text-sm font-medium text-gray-900 px-6 py-6 text-black">Montant Scolarité</th>
                                 <th class="text-sm font-medium text-gray-900 px-6 py-6 text-black">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             @php $id=1 @endphp
-                            @forelse($niveaux as $item)
+                            @forelse($listFrais as $item)
                                 <tr class="border-b-2 border-gray-100">
                                     <th class="text-sm font-medium text-gray-900 px-6 py-6">{{ $id++ }}</th>
-                                    <th class="text-sm font-medium text-gray-900 px-6 py-6">{{ $item->code }}</th>
-                                    <th class="text-sm font-medium text-gray-900 px-6 py-6">{{ $item->libelle }}</th>
-                                    <th class="text-sm font-medium text-gray-900 px-6 py-6">{{ $this->recupererMontantScolarite($item->id) }} FCFA</th>
+                                    <th class="text-sm font-medium text-gray-900 px-6 py-6">{{ $item->schoolyear->school_year }}</th>
+                                    <th class="text-sm font-medium text-gray-900 px-6 py-6">{{ $item->niveau->libelle }}</th>
+                                    <th class="text-sm font-medium text-gray-900 px-6 py-6">{{ number_format ($item->montant) }} FCFA</th>
                                     <th class="text-sm font-medium text-gray-900 px-6 py-6">
-                                            <a href="{{ route('edition.niveaux', $item->id) }}" class="p-1 rounded-sm bg-blue-400"><i class="fa-solid fa-pencil"></i></a>
-                                            <button data-confirm-delete="true" wire:click='supprimerNiveau({{ $item->id }})' class="p-1 rounded-sm bg-red-400"><i class="fa-solid fa-trash-can"></i></button>
+                                            <a href="{{ route('edition.frais', $item->id) }}" class="p-1 rounded-sm bg-blue-400"><i class="fa-solid fa-pencil"></i></a>
+                                            <button data-confirm-delete="true" wire:click='supprimerFrais({{ $item->id }})' class="p-1 rounded-sm bg-red-400"><i class="fa-solid fa-trash-can"></i></button>
                                     </th>
                                 </tr>
                             @empty
@@ -61,7 +61,7 @@
                     </table>
 
                    <div class="mt-3">
-                        {{ $niveaux->links() }}
+                        {{ $listFrais->links() }}
                    </div>
                </div>
             </div>

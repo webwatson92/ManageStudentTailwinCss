@@ -9,6 +9,7 @@ use App\Models\Payment;
 use Livewire\Component;
 use App\Models\SchoolYear;
 use App\Models\Attribution;
+use App\Models\FraisScolarite;
 
 class FairePaiment extends Component
 {
@@ -27,11 +28,14 @@ class FairePaiment extends Component
                 
         //Recpérer le montant de la scolarité d'une classe en fonction du niveau
         $ClasseEleve = $rechercheSiEleveEstDejaInscritDansUneClasse->classe_id;
-   //      dd($ClasseEleve);   
+     
         $infoDeLaClasse = Classe::with('niveau')->find($ClasseEleve);
-        // dd($infoDeLaClasse);
-        $montantScolariteDuNiveau = $infoDeLaClasse->niveau->scolarite;
-
+        
+        $niveauEleveId = $infoDeLaClasse->niveau->id;
+        
+        $requete = FraisScolarite::with('niveau')->where('niveau_id', $niveauEleveId)->first();
+        //dd($requete);
+        $montantScolarite = $requete->montant;
         
         //Faire le culmul des paiements déjà effectué et le comparer au montant de la scolarité
         $listeDesPaiementPayment = Payment::where('eleve_id', $this->eleve_id)
@@ -40,15 +44,15 @@ class FairePaiment extends Component
         foreach ($listeDesPaiementPayment as $paiement) {
             $totalPayer = $totalPayer + $paiement->montant;
         }
-        $operation = $totalPayer - $montantScolariteDuNiveau;
-        if(($totalPayer + $this->montant) > $montantScolariteDuNiveau){
+        $operation = $totalPayer - $montantScolarite;
+        if(($totalPayer + $this->montant) > $montantScolarite){
             if($operation == 0){
                 //message d'information : vous avez déjà couvert votre scolarité 
                 $this->error = "La scolarité de cet élève est reglé.";
             }else{
                 //message d'information : vous avez déjà couvert votre scolarité 
                 $this->error = "Le montant dépasse la scolarité. Il vous reste à payer ". 
-                ($totalPayer + $this->montant) - $montantScolariteDuNiveau  . " FCFA";
+                $montantScolarite - $totalPayer . " FCFA";
             }
 
         }else{

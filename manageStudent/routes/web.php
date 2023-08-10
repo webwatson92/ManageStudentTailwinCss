@@ -5,8 +5,10 @@ use App\Http\Controllers\EleveController;
 use App\Http\Controllers\ClasseController;
 use App\Http\Controllers\NiveauController;
 use App\Http\Controllers\SchoolController;
-use App\Http\Controllers\AttributionController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\AttributionController;
+use App\Http\Controllers\StudentParentController;
+use App\Http\Controllers\FraisScolariteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,6 +63,16 @@ Route::middleware([
         Route::get('/', [PaymentController::class, 'index'])->name('paiement');
         Route::get('/paiement/eleve', [PaymentController::class, 'create'])->name('creation.paiement');
         // Route::get('/modification/{eleve}', [AttributionController::class, 'edit'])->name('edition.attribution');
+    });
+    Route::prefix('parent')->group(function(){
+        Route::get('/', [StudentParentController::class, 'index'])->name('parentEleve');
+        Route::get('/parent-eleve', [StudentParentController::class, 'create'])->name('creation.parentEleve');
+        Route::get('/modification/{parent}', [StudentParentController::class, 'edit'])->name('edition.parentEleve');
+    });
+    Route::prefix('frais-soclarite')->group(function(){
+        Route::get('/', [FraisScolariteController::class, 'index'])->name('frais');
+        Route::get('/ajouter', [FraisScolariteController::class, 'create'])->name('creation.frais');
+        Route::get('/modification/{frais}', [FraisScolariteController::class, 'edit'])->name('edition.frais');
     });
 });
 /* 

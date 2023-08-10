@@ -2,11 +2,12 @@
 
 namespace App\Http\Livewire;
 
+use Alert;
 use App\Models\Niveau;
 use Livewire\Component;
 use App\Models\SchoolYear;
 use Livewire\WithPagination;
-use Alert;
+use App\Models\FraisScolarite;
 
 class ListeNiveaux extends Component
 {
@@ -24,25 +25,29 @@ class ListeNiveaux extends Component
         return redirect()->route('niveaux');
     }
     
+    public function recupererMontantScolarite($niveauId){
+        $anneeActive = SchoolYear::where('active', '1')->first();
+        $requette = FraisScolarite::where('niveau_id', $niveauId)
+                            ->where('school_year_id', $anneeActive->id)
+                            ->first();
+                        
+        return $requette->montant;
+    }
+
+
     public function render()
     {
         if(!empty($this->search)){
             $niveaux =  Niveau::where('libelle', 'LIKE', '%'. $this->search.'%')
             ->orWhere('code', 'LIKE', '%'. $this->search.'%')
             ->paginate(10);
-            return view('livewire.liste-niveaux', compact('niveaux'));
         }else{
             $anneeActive = SchoolYear::where('active', '1')->first();
             $niveaux =  Niveau::with('school_year')->where('niveaux.school_year_id', $anneeActive->id)
                         ->latest()
                         ->paginate(10);
-            return view('livewire.liste-niveaux', compact('niveaux'));
         }
 
-     
-        $niveaux =  Niveau::orderBy('created_at', 'desc')
-                    ->paginate(10);
-
-        return view('livewire.liste-niveaux');
+        return view('livewire.liste-niveaux', compact('niveaux'));
     }
 }

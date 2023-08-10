@@ -13,23 +13,19 @@ class EditerNiveau extends Component
     public function mount(){
         $this->code = $this->niveau->code;
         $this->libelle = $this->niveau->libelle;
-        $this->scolarite = $this->niveau->scolarite;
     }
 
     public function modifierNiveaux(){
         $this->validate([
             'code' =>"string|required",
             'libelle' =>"string|required",
-            'scolarite' =>"integer|required",
         ]);
 
         try{
                 $niveau = Niveau::find($this->niveau->id);
                 $niveau->code = $this->code;
                 $niveau->libelle = $this->libelle;
-                $niveau->scolarite = $this->scolarite;
                 $niveau->save();
-                if($niveau){ $this->libelle=""; $this->code=""; $this->scolarite="";}
                 Alert::toast('Modification du niveau scolaire effectué avec succès.', 'success');
                 //Alert::success('Félicitation !', 'Niveau scolaire ajoutée avec succès.');
                 return redirect()->route('niveaux');

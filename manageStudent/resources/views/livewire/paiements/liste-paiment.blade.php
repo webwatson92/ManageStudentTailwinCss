@@ -47,7 +47,7 @@
                                     <th class="text-sm font-medium text-gray-900 px-6 py-6">{{ $item->montant }} </th>
                                     <th class="text-sm font-medium text-gray-900 px-6 py-6">
                                             <a href="{{ route('edition.attribution', $item->id) }}" class="p-1 rounded-sm bg-blue-400"><i class="fa-solid fa-pencil"></i></a>
-                                            <button data-confirm-delete="true" wire:click='supprimerRentrerClasse({{ $item->id }})' class="p-1 rounded-sm bg-red-400"><i class="fa-solid fa-trash-can"></i></button>
+                                            <button data-confirm-delete="true" wire:click='supprimerPaiement({{ $item->id }})' class="p-1 rounded-sm bg-red-400"><i class="fa-solid fa-trash-can"></i></button>
                                     </th>
                                 </tr>
                             @empty
