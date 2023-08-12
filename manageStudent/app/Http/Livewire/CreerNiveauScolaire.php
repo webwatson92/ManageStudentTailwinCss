@@ -29,7 +29,7 @@ class CreerNiveauScolaire extends Component
                 $niveau->save();
                 Alert::toast('Niveau scolaire ajoutée avec succès.', 'success');
                 //Alert::success('Félicitation !', 'Niveau scolaire ajoutée avec succès.');
-                return redirect()->route('niveaux');
+                return redirect()->route('frais');
             
         }catch(Exeception $e){
             //traitement de l'exeception

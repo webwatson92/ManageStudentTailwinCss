@@ -15,11 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('code');
             $table->string('libelle');
-            $table->string('scolarite');
             $table->foreignId('school_year_id')
-                    ->constrained()
-                    ->onUpdate('cascade')
-                    ->onDelete('cascade');
+                ->constrained()
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }

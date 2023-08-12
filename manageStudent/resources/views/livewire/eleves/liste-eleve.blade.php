@@ -46,6 +46,7 @@
                                     <th class="text-sm font-medium text-gray-900 px-6 py-6">{{ $item->nom_parent }}</th>
                                     <th class="text-sm font-medium text-gray-900 px-6 py-6">{{ $item->contact_parent }}</th>
                                     <th class="text-sm font-medium text-gray-900 px-6 py-6">
+                                            <a href="{{ route('show.eleve', $item->id) }}" class="p-1 rounded-sm bg-blue-400"><i class="fa-solid fa-eye"></i></a>
                                             <a href="{{ route('edition.eleve', $item->id) }}" class="p-1 rounded-sm bg-blue-400"><i class="fa-solid fa-pencil"></i></a>
                                             <button data-confirm-delete="true" wire:click='supprimerEleve({{ $item->id }})' class="p-1 rounded-sm bg-red-400"><i class="fa-solid fa-trash-can"></i></button>
                                     </th>

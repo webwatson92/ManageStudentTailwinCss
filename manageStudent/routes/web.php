@@ -39,7 +39,7 @@ Route::middleware([
     });
     Route::prefix('settings')->group(function(){
         Route::get('/', [SchoolController::class, 'index'])->name('school_years');
-        Route::get('/creation-d-annee-scollaire', [SchoolController::class, 'create'])->name('creation.anneescolaire');
+        Route::get('/creation-d-annee-scolaire', [SchoolController::class, 'create'])->name('creation.anneescolaire');
         Route::get('/creation-niveau-de-classe', [NiveauController::class, 'create'])->name('creation.niveaux');
         Route::get('/edition-niveau/{niveau}', [NiveauController::class, 'edit'])->name('edition.niveaux');
     });
@@ -51,6 +51,7 @@ Route::middleware([
     Route::prefix('eleve')->group(function(){
         Route::get('/', [EleveController::class, 'index'])->name('eleve');
         Route::get('/creation-compte-eleve', [EleveController::class, 'create'])->name('inscription.eleve');
+        Route::get('/details-informations-eleve/{eleve}', [EleveController::class, 'show'])->name('show.eleve');
         Route::get('/modificatin-des-infos-eleve/{eleve}', [EleveController::class, 'edit'])->name('edition.eleve');
     });
     

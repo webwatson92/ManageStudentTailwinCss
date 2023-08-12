@@ -10,4 +10,6 @@ class StudentParent extends Model
 {
     use HasFactory;
     use Notifiable;
+
+    protected $table = "parents";
 }
