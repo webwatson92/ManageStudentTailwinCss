@@ -9,3 +9,4 @@
         @livewire('attributions.faire-rentrer-eleve-classe')
     </div>
 </x-app-layout>
+
